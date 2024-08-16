@@ -12,4 +12,29 @@ const storage = multer.diskStorage({
 
 const upload = multer({ storage: storage })
 
+
+
+
+
+const cloudinary = require('cloudinary').v2;
+
+cloudinary.config({
+    cloud_name: process.env.CLOUDINARY_NAME,
+    api_key: process.env.CLOUDINARY_API_KEY,
+    api_secret: process.env.CLOUDINARY_API_SECRET
+});
+const uploadImage = (filePath) => {
+    return cloudinary.uploader.upload(filePath, { folder: 'your-folder-name' });
+};
+
+uploadImage('path/to/your/image.jpg')
+  .then(result => {
+    console.log('Image uploaded to Cloudinary:', result.url);
+  })
+  .catch(error => {
+    console.error('Error uploading image:', error);
+  });
+  
+
+
 module.exports.upload = upload;
