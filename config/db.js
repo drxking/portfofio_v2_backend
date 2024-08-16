@@ -1,7 +1,7 @@
 const mongoose = require("mongoose")
 
 
-mongoose.connect(`${process.env.MONGO_URI}`)
+mongoose.connect(`${process.env.MONGO_URI}/portfolio`)
 
 let db = mongoose.connection;
 

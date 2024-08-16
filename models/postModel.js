@@ -15,7 +15,7 @@ const postSchema = mongoose.Schema({
     },
     author: {
         type: String,
-        required: true
+        default:"Sudip Acharya"
     },
     image: {
         type: String
@@ -28,8 +28,7 @@ const postSchema = mongoose.Schema({
 function checkPostInputs(data) {
     let schema = joi.object({
         headline: joi.string().min(3).required(),
-        desc: joi.string().required(),
-        author: joi.string().required()
+        desc: joi.string().required()
     })
     return schema.validate(data).error;
 }

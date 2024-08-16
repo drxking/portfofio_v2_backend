@@ -2,14 +2,16 @@ const express = require("express")
 const router = express.Router()
 const jwt = require("jsonwebtoken")
 const { postController, getController, getSingleController } = require("../controllers/apiController")
+const { upload } = require("../config/multer")
 
 
 router.get("/posts", getController)
-router.post("/posts", postController)
+router.post("/posts", upload.single("image"),postController)
 router.get("/posts/:id", getSingleController)
-router.post("/is-logged-in", (req, res) => {
+router.get("/is-logged-in", (req, res) => {
     try {
-        let { token } = req.body;
+        let token = req.cookies.token;
+        console.log(token)
         if (token) {
             let result = jwt.verify(token, process.env.JWT_KEY)
             if (result) {
