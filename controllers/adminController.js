@@ -16,3 +16,12 @@ module.exports.loginController = (req, res) => {
 }
 
 
+module.exports.getAdminController = async (req, res) => {
+    try {
+        const posts = await postModel.aggregate([{ $project: { headline: 1, desc: 1, author: 1, image: 1, createdAt: 1 } }])
+        res.json(posts).status(200)
+    } catch (err) {
+        console.log(err.message)
+        res.json({ status: "failure", message: `Some Thing went wrong` }).status(201)
+    }
+}
