@@ -15,9 +15,12 @@ const postSchema = mongoose.Schema({
     },
     author: {
         type: String,
-        default:"Sudip Acharya"
+        default: "Sudip Acharya"
     },
     image: {
+        type: String
+    },
+    image_public_id: {
         type: String
     },
     key: [{

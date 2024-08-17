@@ -20,9 +20,10 @@ app.use(session({
     saveUninitialized: false,
     secret: "Hello"
 }))
+
 app.use(cors({
     origin: [`${process.env.CORS_ORIGIN}`, `${process.env.CORS_ORIGIN2}`],
-    methods: ["POST", "GET"],
+    methods: ["POST", "GET","PATCH","DELETE"],
     credentials: true
 }))
 
@@ -36,6 +37,16 @@ app.use((req, res, next) => {
 
 app.use("/api", apiRouter)
 app.use("/admin", adminRouter)
+
+
+
+app.use((err, req, res, next) => {
+    if (err) {
+        res.status(400).json({ message: err.message });
+    } else {
+        next();
+    }
+});
 
 app.listen(PORT, () => {
     console.log(`Listening at Port ${PORT}`)
