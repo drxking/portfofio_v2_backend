@@ -11,7 +11,8 @@ const postSchema = mongoose.Schema({
         required: true
     },
     types: {
-        type: String
+        type: String,
+        default:"Blog"
     },
     author: {
         type: String,

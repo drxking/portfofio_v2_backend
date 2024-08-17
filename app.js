@@ -22,8 +22,8 @@ app.use(session({
 }))
 
 app.use(cors({
-    origin: [`${process.env.CORS_ORIGIN}`, `${process.env.CORS_ORIGIN2}`],
-    methods: ["POST", "GET","PATCH","DELETE"],
+    origin: [`${process.env.CORS_ORIGIN}`],
+    methods: ["POST", "GET", "PATCH", "DELETE"],
     credentials: true
 }))
 
