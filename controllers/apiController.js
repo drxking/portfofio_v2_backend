@@ -44,7 +44,6 @@ module.exports.getSingleController = async (req, res) => {
 
 module.exports.patchController = async (req, res) => {
     try {
-        console.log(req.file)
         if (req.file) {
             let post = await postModel.findOneAndUpdate({ _id: req.params.id }, { headline: req.body.headline, desc: req.body.desc, image: req.file.path, image_public_id: req.file.filename })
             await cloudinary.uploader.destroy(post.image_public_id)

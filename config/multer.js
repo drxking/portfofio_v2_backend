@@ -17,7 +17,7 @@ const storage = new CloudinaryStorage({
     folder: 'uploads', // Folder name in Cloudinary
     format: async (req, file) => 'jpg', // supports promises as well
     public_id: (req, file) => `${file.originalname.split('.')[0]}${Date.now()}`, // Use the original file name without the extension
-    // transformation: [{ flags: 'force_strip', quality: 'auto:low', fetch_format: 'auto', bytes: 100000 }]
+    transformation: [{ flags: 'force_strip', quality: 'auto:low', fetch_format: 'auto', bytes: 100000, height: 720, width: "auto" }]
   },
 });
 
