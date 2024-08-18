@@ -1,4 +1,5 @@
-const jwt = require("jsonwebtoken")
+const jwt = require("jsonwebtoken");
+const { postModel } = require("../models/postModel");
 
 module.exports.loginController = (req, res) => {
     let { username, password } = req.body;
@@ -19,6 +20,7 @@ module.exports.loginController = (req, res) => {
 module.exports.getAdminController = async (req, res) => {
     try {
         const posts = await postModel.aggregate([{ $project: { headline: 1, desc: 1, author: 1, image: 1, createdAt: 1 } }])
+        posts.reverse()
         res.json(posts).status(200)
     } catch (err) {
         console.log(err.message)

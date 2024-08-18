@@ -9,13 +9,12 @@ const { isLoggedIn } = require("../middleware/isLoggedIn")
 router.get("/posts", getController)
 router.post("/posts", isLoggedIn, upload.single("image"), postController)
 router.get("/posts/:id", getSingleController)
-router.patch("/posts/:id", isLoggedIn, patchController)
+router.put("/posts/:id", isLoggedIn, upload.single("image"), patchController)
 router.delete("/posts/:id", isLoggedIn, deleteController)
 
 router.get("/is-logged-in", (req, res) => {
     try {
         let token = req.cookies.token;
-        console.log(token)
         if (token) {
             let result = jwt.verify(token, process.env.JWT_KEY)
             if (result) {

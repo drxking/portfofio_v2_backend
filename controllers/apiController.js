@@ -9,7 +9,6 @@ module.exports.postController = async (req, res, next) => {
             if (result) return res.json(result.message);
             const post = await postModel.create({ headline: req.body.headline, desc: req.body.desc, image: req.file.path, image_public_id: req.file.filename })
             res.json({ status: "success", message: `${post} posted` }).status(201)
-            console.log(req.file)
         }
         else {
             res.json({ status: "failure", message: `Image required` }).status(201)
@@ -25,6 +24,7 @@ module.exports.postController = async (req, res, next) => {
 module.exports.getController = async (req, res) => {
     try {
         const posts = await postModel.aggregate([{ $project: { headline: 1, desc: 1, author: 1, image: 1, createdAt: 1 } }])
+        posts.reverse()
         res.json(posts).status(200)
     } catch (err) {
         console.log(err.message)
@@ -44,8 +44,15 @@ module.exports.getSingleController = async (req, res) => {
 
 module.exports.patchController = async (req, res) => {
     try {
-        let post = await postModel.findOneAndUpdate({ _id: req.params.id }, { headline: req.body.headline, desc: req.body.desc })
-        res.send({ data: post, status: "success" }).status(201)
+        console.log(req.file)
+        if (req.file) {
+            let post = await postModel.findOneAndUpdate({ _id: req.params.id }, { headline: req.body.headline, desc: req.body.desc, image: req.file.path, image_public_id: req.file.filename })
+            await cloudinary.uploader.destroy(post.image_public_id)
+            res.send({ data: post, status: "success" }).status(201)
+        } else {
+            let post = await postModel.findOneAndUpdate({ _id: req.params.id }, { headline: req.body.headline, desc: req.body.desc })
+            res.send({ data: post, status: "success" }).status(201)
+        }
     }
     catch (err) {
         console.log(err.message)
