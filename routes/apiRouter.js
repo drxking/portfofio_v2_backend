@@ -11,6 +11,7 @@ router.get("/posts/:id", getSingleController)
 router.put("/posts/:id", isLoggedIn, upload.single("image"), patchController)
 router.delete("/posts/:id", isLoggedIn, deleteController)
 
+
 router.get("/is-logged-in", (req, res) => {
     try {
         let token = req.cookies.token;
