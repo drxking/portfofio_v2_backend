@@ -5,7 +5,6 @@ const { postController, getController, getSingleController, patchController, del
 const upload = require("../config/multer")
 const { isLoggedIn } = require("../middleware/isLoggedIn")
 
-
 router.get("/posts", getController)
 router.post("/posts", isLoggedIn, upload.single("image"), postController)
 router.get("/posts/:id", getSingleController)
