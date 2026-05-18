@@ -24,7 +24,7 @@ app.use(session({
 }))
 
 app.use(cors({
-    origin: ["https://sudipacharya456.com.np/","https://forgenexa.vercel.app/"],
+    origin: ["https://sudipacharya456.com.np","https://forgenexa.vercel.app"],
     // origin:"*",
     methods: ["POST", "GET", "PUT", "DELETE"],
     credentials: true
