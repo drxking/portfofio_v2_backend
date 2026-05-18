@@ -7,7 +7,7 @@ module.exports.postController = async (req, res, next) => {
         if (req.file) {
             let result = checkPostInputs({ headline, desc })
             if (result) return res.json(result.message);
-            const post = await postModel.create({ headline: req.body.headline, desc: req.body.desc, image: req.file.path, image_public_id: req.file.filename })
+            const post = await postModel.create({ headline, desc, image: req.file.path, image_public_id: req.file.filename })
             res.json({ status: "success", message: `${post} posted` }).status(201)
         }
         else {
