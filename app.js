@@ -24,10 +24,10 @@ app.use(session({
 }))
 
 app.use(cors({
-    // origin: ["https://sudipacharya456.com.np/","https://pkxrwbpk-5173.inc1.devtunnels.ms/"],
-    origin:"*",
-    // methods: ["POST", "GET", "PUT", "DELETE"],
-    // credentials: true
+    origin: ["https://sudipacharya456.com.np/","https://forgenexa.vercel.app/"],
+    // origin:"*",
+    methods: ["POST", "GET", "PUT", "DELETE"],
+    credentials: true
 }))
 
 app.use(morgan("dev"))
