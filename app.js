@@ -24,8 +24,8 @@ app.use(session({
 }))
 
 app.use(cors({
-    origin: ["https://sudipacharya456.com.np/","https://pkxrwbpk-5173.inc1.devtunnels.ms/"],
-    // origin:"*",
+    // origin: ["https://sudipacharya456.com.np/","https://pkxrwbpk-5173.inc1.devtunnels.ms/"],
+    origin:"*",
     methods: ["POST", "GET", "PUT", "DELETE"],
     credentials: true
 }))
